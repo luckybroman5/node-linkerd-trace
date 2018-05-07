@@ -60,22 +60,29 @@ if (!flags.traceId|| !flags.spanId || !flags.parentId) {
   console.log(colors.red.underline.bold('** SINCE NOT ALL FLAGS ARE GIVEN, SOME (or ALL) DEFAULTS WERE USED USED.. SEE HELP ^^^'));
 }
 
-const tid = flags.traceId || 'hello';
-const sid = flags.spanId || 'world,';
-const pid = flags.parentId || 'kade';
+const tid = flags.traceId ? String(flags.traceId) : 'hello';
+const sid = flags.spanId ? String(flags.spanId) : 'world,';
+const pid = flags.parentId ? String(flags.parentId) : 'kade';
 
 const result = traceToLinkerdPackedHeader({
-  traceId: String(tid),
-  spanId: String(sid),
-  parentId: String(pid),
+  traceId: tid,
+  spanId: sid,
+  parentId: pid,
 });
 
 console.log();
 
 console.log(colors.grey.underline('Values:'));
-console.log(colors.dim('Trace ID: ', tid));
-console.log(colors.dim('Span ID: ', sid));
-console.log(colors.dim('Parent ID: ', pid));
+console.log(colors.dim('Trace ID  : ', tid));
+console.log(colors.dim('Span ID   : ', sid));
+console.log(colors.dim('Parent ID : ', pid));
+console.log();
+
+console.log(colors.grey.underline('Returned from `getByteArray()`:'));
+console.log(colors.dim('Trace ID  : ', getByteArray(tid)));
+console.log(colors.dim('Span ID   : ', getByteArray(sid)));
+console.log(colors.dim('Parent ID : ', getByteArray(pid)));
+console.log();
 
 
 
