@@ -12,13 +12,17 @@ console.log(figlet.textSync('node-linkerd-trace', {
   horizontalLayout: 'default',
   verticalLayout: 'default'
 }));
- 
-args
-  .option('span', 'Something else Linkderd related', 'world')
-  .option('traceId', 'Something Linkerd related', 'hello')
-  .option('parent', 'Yet one more thing linkerd related', '1231252363246');
 
-const flags = args.parse(process.argv, { exit: false})
+const parse = (val) => {
+  return typeof val !== 'string' ? String(val) : val;
+}
+
+args
+  .option('spanId', 'Something else Linkderd related')
+  .option('traceId', 'Something Linkerd related')
+  .option('parentId', 'Yet one more thing linkerd related');
+
+const flags = args.parse(process.argv, {exit: false});
 
 const traceToLinkerdPackedHeader = (tId) => {
   let flagBytes = [0, 0, 0, 0, 0, 0, 0, 6]; // The hardcoded end of the "serialized" array
@@ -49,18 +53,28 @@ const getByteArray = (id) => {
   return byteArray;
 }
 
-if (flags.trace === 'hello' || flags.span === 'world' || flags.parent === '1231252363246') {
+if (!flags.traceId|| !flags.spanId || !flags.parentId) {
   args.showHelp();
-  console.log(colors.red.underline.bold('** SINCE NOT ALL FLAGS ARE GIVEN, SOME (or ALL) DEFAULTS WERE USED USED.. SEE HELP ^^^ **'));
+  console.log(colors.red.underline.bold('** SINCE NOT ALL FLAGS ARE GIVEN, SOME (or ALL) DEFAULTS WERE USED USED.. SEE HELP ^^^'));
 }
 
+const tid = flags.traceId || 'hello';
+const sid = flags.spanId || 'world,';
+const pid = flags.parentId || 'kade';
+
 const result = traceToLinkerdPackedHeader({
-  traceId: String(flags.traceId) || 'hello',
-  spanId: String(flags.spanId) || 'world',
-  parentId: String(flags.parentId) || 'screens',
+  traceId: String(tid),
+  spanId: String(sid),
+  parentId: String(pid),
 });
 
 console.log();
+
+console.log(colors.grey.underline('Values:'));
+console.log(colors.dim('Trace ID: ', tid));
+console.log(colors.dim('Span ID: ', sid));
+console.log(colors.dim('Parent ID: ', pid));
+
 
 
 console.log(colors.cyan.underline.bold('RESULT: '), colors.green(result));
