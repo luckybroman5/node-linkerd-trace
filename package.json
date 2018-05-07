@@ -1,14 +1,20 @@
 {
-  "name": "linkerd-trace",
+  "name": "node-linkerd-trace",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "node-linkred-trace": "./index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bytebuffer": "^5.0.1"
+    "args": "^4.0.0",
+    "bytebuffer": "^5.0.1",
+    "colors": "^1.2.4",
+    "figlet": "^1.2.0"
   }
 }
