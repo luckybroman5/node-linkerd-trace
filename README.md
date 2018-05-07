@@ -44,7 +44,7 @@ Well, that is somewhat of a complicated, but at a high level, it is taking 3 inp
 
 For a raw breakdown of what the code is doing, see the `BREAKDOWN.md` doc.
 
-### Usage
+### Install
 
 ##### [Install NVM, NPM, Nodejs](https://github.com/creationix/nvm#install-script)
 
@@ -58,9 +58,14 @@ nvm alias default 8 # optional
 ##### Install This package (Start Here if you have npm and node installed)
 
 ```
-npm install -g linkerd-trace
+npm install -g node-linkerd-trace
 
-linkerd-trace
+```
+
+### Usage
+
+```
+node-linkerd-trace
 ```
 
 ###### Above should run with default values and print more usage

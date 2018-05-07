@@ -1,4 +1,4 @@
-'use strct';
+'use strict';
 
 const ByteBuffer = require('bytebuffer');
 const args = require('args');

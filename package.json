@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "node-linkred-trace": "./index.js"
+    "node-linkerd-trace": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
