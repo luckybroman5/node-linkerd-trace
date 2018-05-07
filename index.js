@@ -22,6 +22,8 @@ args
   .option('traceId', 'Something Linkerd related')
   .option('parentId', 'Yet one more thing linkerd related');
 
+args.example('node-linkerd-trace --traceId=12312512 --spanId=141253325 --parentId=14213532', 'Given a span, trace, and parent id, it will generate string that linkerd uses for tracing.');
+
 const flags = args.parse(process.argv, {exit: false});
 
 const traceToLinkerdPackedHeader = (tId) => {
